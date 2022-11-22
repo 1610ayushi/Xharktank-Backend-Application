@@ -1,0 +1,23 @@
+{
+    "name": "tayushi1610-me_buildout_xharktank",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js",
+        "dev": "nodemon index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://gitlab.crio.do/COHORT_ME_BUILDOUT_XHARKTANK_ENROLL_1668411037975/tayushi1610-ME_BUILDOUT_XHARKTANK.git"
+    },
+    "author": "ayushi tiwari",
+    "license": "ISC",
+    "dependencies": {
+        "dotenv": "^16.0.3",
+        "express": "^4.18.2",
+        "mongo-express": "^1.0.0",
+        "mongoose": "^6.7.2",
+        "nodemon": "^2.0.20"
+    }
+}
