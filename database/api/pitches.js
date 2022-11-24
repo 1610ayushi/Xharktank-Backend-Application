@@ -48,9 +48,7 @@ Router.post("/:id/makeOffer", async (req, res) => {
       return res.status(404).send("Pitch Not Found");
     }
 
-    return res
-      .status(201)
-      .json({ id: createdOffer._id, message: "Offer Created Successfully" });
+    return res.status(201).json({ id: createdOffer._id });
   } catch (error) {
     return res.status(400).send("Invalid Request Body");
   }
@@ -58,7 +56,9 @@ Router.post("/:id/makeOffer", async (req, res) => {
 
 Router.get("/", async (req, res) => {
   try {
-    const data = await PitchModel.find().populate("offers");
+    const data = await PitchModel.find()
+      .populate("offers")
+      .sort({ createAt: -1 });
 
     return res.status(200).json(data);
   } catch (error) {
@@ -77,9 +77,18 @@ Router.get("/:id", async (req, res) => {
       return res.status(404).send("Pitch Not Found");
     }
 
-    return res.status(200).json(data);
+    const dto = {
+      id: id,
+      entrepreneur: data._doc.entrepreneur,
+      pitchTitle: data._doc.pitchTitle,
+      pitchIdea: data._doc.pitchIdea,
+      askAmount: data._doc.askAmount,
+      equity: data._doc.equity,
+      offers: data._doc.offers
+    };
+
+    return res.status(200).json(dto);
   } catch (error) {
-    console.log(error);
     return res.status(400).send("Internal Server Error");
   }
 });
