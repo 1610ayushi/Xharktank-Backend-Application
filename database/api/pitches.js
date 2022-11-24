@@ -29,6 +29,10 @@ Router.post("/:id/makeOffer", async (req, res) => {
     const { investor, amount, equity, comment } = req.body;
     const { id } = req.params;
 
+    if(!investor || !amount || !equity || !comment){
+      return res.status(400);
+    }
+
     const createdOffer = await OfferModel.create({
       investor,
       amount,
@@ -58,7 +62,7 @@ Router.get("/", async (req, res) => {
   try {
     const data = await PitchModel.find()
       .populate("offers")
-      .sort({ createAt: -1 });
+      .sort({ createdAt: -1 });
 
     return res.status(200).json(data);
   } catch (error) {
