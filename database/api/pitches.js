@@ -61,7 +61,7 @@ Router.post("/:id/makeOffer", async (req, res) => {
 Router.get("/", async (req, res) => {
   try {
     const data = await PitchModel.find()
-      .sort({ "createdAt": 1 })
+      .sort({ "createdAt": -1 })
       .populate("offers");
 
     return res.status(200).json(data);
