@@ -68,7 +68,29 @@ Router.get("/", async (req, res) => {
       .sort({ createdAt: -1 })
       .populate("offers");
 
-    return res.status(200).json(data);
+    const newData = data._doc.map((each) => {
+      const dto = {
+        id: each._id,
+        entrepreneur: each.entrepreneur,
+        pitchTitle: each.pitchTitle,
+        pitchIdea: each.pitchIdea,
+        askAmount: each.askAmount,
+        equity: each.equity,
+        offers: data._doc.offers.map((each2) => {
+          return {
+            id: each2._id,
+            investor: each2.investor,
+            amount: each2.amount,
+            equity: each2.equity,
+            comment: each2.comment,
+          };
+        })
+      };
+
+      return dto;
+    })
+
+    return res.status(200).json(newData);
   } catch (error) {
     console.log(error);
     return res.status(400).send("Internal Server Error");
