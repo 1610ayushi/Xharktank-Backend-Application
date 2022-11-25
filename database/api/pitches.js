@@ -33,6 +33,10 @@ Router.post("/:id/makeOffer", async (req, res) => {
     const { investor, amount, equity, comment } = req.body;
     const { id } = req.params;
 
+    if(equity > 100 || equity < 0){
+      return res.status(401);
+    }
+
     // if(!investor || !amount || !equity || !comment){
     //   return res.status(400);
     // }
