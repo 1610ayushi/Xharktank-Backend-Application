@@ -10,9 +10,9 @@ Router.post("/", async (req, res) => {
   try {
     const { entrepreneur, pitchTitle, pitchIdea, askAmount, equity } = req.body;
 
-    if(equity < 0 || equity > 100){
-      return res.status(401);
-    }
+    // if(equity < 0 || equity > 100){
+    //   return res.status(401);
+    // }
 
     const createdPitch = await PitchModel.create({
       entrepreneur,
@@ -32,10 +32,6 @@ Router.post("/:id/makeOffer", async (req, res) => {
   try {
     const { investor, amount, equity, comment } = req.body;
     const { id } = req.params;
-
-    if(equity > 100 || equity < 0){
-      return res.status(401);
-    }
 
     // if(!investor || !amount || !equity || !comment){
     //   return res.status(400);
