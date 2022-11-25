@@ -68,7 +68,8 @@ Router.get("/", async (req, res) => {
       .sort({ createdAt: -1 })
       .populate("offers");
 
-    const newData = data._doc.map((each) => {
+
+    const newData = data.map((each) => {
       const dto = {
         id: each._id,
         entrepreneur: each.entrepreneur,

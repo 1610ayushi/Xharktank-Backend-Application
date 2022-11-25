@@ -164,6 +164,7 @@ class XharkTankAssessment(TestCase):
             "equity": 25.3
         }
         response = self.post_api(endpoint, json.dumps(body))
+        print(response)
         self.assertIn(response.status_code, self.POSITIVE_STATUS_CODES)
         response = self.get_api(endpoint)
         self.assertIn(response.status_code, self.POSITIVE_STATUS_CODES)
