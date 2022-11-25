@@ -65,7 +65,7 @@ Router.post("/:id/makeOffer", async (req, res) => {
 Router.get("/", async (req, res) => {
   try {
     const data = await PitchModel.find()
-      .sort({ "createdAt": -1 })
+      .sort({ createdAt: -1 })
       .populate("offers");
 
     return res.status(200).json(data);
@@ -94,6 +94,18 @@ Router.get("/:id", async (req, res) => {
       equity: data._doc.equity,
       offers: data._doc.offers,
     };
+
+    const updatedOffers = data._doc.offers.map((each) => {
+      return {
+        id: each._id,
+        investor: each.investor,
+        amount: each.amount,
+        equity: each.equity,
+        comment: each.comment,
+      };
+    });
+
+    dto.offers = updatedOffers
 
     return res.status(200).json(dto);
   } catch (error) {
