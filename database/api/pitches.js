@@ -76,16 +76,17 @@ Router.get("/", async (req, res) => {
         pitchIdea: each.pitchIdea,
         askAmount: each.askAmount,
         equity: each.equity,
-        offers: each.offers.map((each2) => {
-          return {
-            id: each2._id,
-            investor: each2.investor,
-            amount: each2.amount,
-            equity: each2.equity,
-            comment: each2.comment,
-          };
-        })
       };
+
+      dto.offers = each.offers.map((each2) => {
+        return {
+          id: each2._id,
+          investor: each2.investor,
+          amount: each2.amount,
+          equity: each2.equity,
+          comment: each2.comment,
+        };
+      })
 
       return dto;
     })
