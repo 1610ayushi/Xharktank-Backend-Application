@@ -29,9 +29,9 @@ Router.post("/:id/makeOffer", async (req, res) => {
     const { investor, amount, equity, comment } = req.body;
     const { id } = req.params;
 
-    if(!investor || !amount || !equity || !comment){
-      return res.status(400);
-    }
+    // if(!investor || !amount || !equity || !comment){
+    //   return res.status(400);
+    // }
 
     const createdOffer = await OfferModel.create({
       investor,
