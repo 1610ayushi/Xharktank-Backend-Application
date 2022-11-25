@@ -43,6 +43,13 @@ Router.post("/:id/makeOffer", async (req, res) => {
     const { investor, amount, equity, comment } = req.body;
     const { id } = req.params;
 
+    if(validateEnpty(investor) || validateEnpty(comment) || amount <= 0){
+      throw new Error("Invalid data");
+    }
+    if(equity > 100){
+      throw new Error("Invalid data");
+    }
+
     const createdOffer = await OfferModel.create({
       investor,
       amount,
