@@ -18,11 +18,10 @@ Router.post("/", async (req, res) => {
     const { entrepreneur, pitchTitle, pitchIdea, askAmount, equity } = req.body;
 
     if(validateEnpty(entrepreneur) || validateEnpty(pitchTitle) || validateEnpty(pitchIdea) || askAmount <= 0){
-      return res.status(400);
+      throw new Error("Invalid data");
     }
-
     if(equity > 100){
-      return res.status(400)
+      throw new Error("Invalid data");
     }
 
     const createdPitch = await PitchModel.create({
