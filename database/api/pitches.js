@@ -6,13 +6,24 @@ const OfferModel = require("../schema/offer");
 
 const Router = express.Router();
 
+function validateEnpty(field){
+  if(field === "" || field === null){
+    return true;
+  }
+  return false
+}
+
 Router.post("/", async (req, res) => {
   try {
     const { entrepreneur, pitchTitle, pitchIdea, askAmount, equity } = req.body;
 
-    // if(equity < 0 || equity > 100){
-    //   return res.status(401);
-    // }
+    if(validateEnpty(entrepreneur) || validateEnpty(pitchTitle) || validateEnpty(pitchIdea) || askAmount <= 0){
+      return res.status(400);
+    }
+
+    if(equity > 100){
+      return res.status(400)
+    }
 
     const createdPitch = await PitchModel.create({
       entrepreneur,
